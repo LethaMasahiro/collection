@@ -3,7 +3,7 @@ This repository contains works like my thesis and selected projects. On some pro
 
 
 ## Content of this repository:
-- Master thesis: Methods and Tools for Gamespace Engineering: Designing a Web-based Application to Assist the Planning Process of Gamespaces (grade: )
+- Master thesis: Methods and Tools for Gamespace Engineering: Designing a Web-based Application to Assist the Planning Process of Gamespaces (grade: 1.7)
 - Bachelor thesis: Complex Interaction Mechanisms for Spectator Integration in Games (grade: 1.3)
 - CardME (university project 2022, creation of a website with REST and SpringBoot, team size: 4 people)
 - SAP Analytics (university project 2023, using SAP Business Application Studios for data analysis, team size: 4 people)
