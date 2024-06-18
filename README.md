@@ -20,12 +20,14 @@ This thesis examines the interaction mechanisms that can be used in games to int
 
 ### CardME
 CardMe is a hypothetical subscription service that offers users to send physical customisable and thoughtful cards to friends and relatives. This was a university project that was praised for its technical implementation. We used REST API and SpringBoot to implement the client and server technology, including a Paypal payment service and dividing the work equally between us. One year later, the project was published on the university's website to serve as inspiration for future projects.
+- Link to the Figma Design: https://www.figma.com/design/rdcl6QZN6PTYEsPHkwbcAm/CardME?node-id=0-1&t=Mfsv24BjrNjDM2aN-1
 - Team size: 4 people
 - Used technologies: SpringBoot, JavaScript, REST, MongoDB
 - Grade: 1.0 for the project (1.0/4.0, the best possible grade in Germany)
 
 ### SAP Analytics
 This project served the purpose to get familiar with SAP technologies and with the SAP HANA database, specifically. The goal was to analyze the learning behavior of our business partner's colleagues (data extracted from MSG). To do that, we created a web service that visualized the data given to us according to specified filters, such as the country the learners come from, the business unit, etc. The service also contains information about the courses offered by the MSG learning platform and functionality for the website's manager.
+- Link to the Figma design: https://www.figma.com/design/wi6Q5oPzwd8o18ZrqR3oLY/ProLearning?node-id=0-1&t=iPbT3LIEsVJCi2eo-1
 - Team size: 4 people
 - Used technologies: SAP, SAP HANA, SAP Business Application Studios
 - Grade: 2.0 (2.0/4.0)
@@ -40,3 +42,14 @@ This was the final project of a shader course in university, teaching us how to 
 In this project we built our own physical controller out of a wooden box with buttons attached to it. We collected the input of the controller in a simple 1v1 button smash game we developed within 40 hours (on a game jam), focussing on simple mechanics and a fun experience for the players. This game won the second place among 20 other games and a special price for the best concept.
 - Team size: ~7 people
 - Used technologies: Unity, physical controller
+
+### Absence App
+I started this project to track the attendance and absence in my dance group. So far, I designed the UI in Figma and implemented the frontend of the login, register, home and profile page. Due to the lack of time after I started my internship, I haven't been able to finish this project, but I plan to add a backend to it and finish the app in the future.
+- Link to the Figma design: https://www.figma.com/design/uAqVHOPFBYIDPxxFhR9Y8u/Untitled?node-id=0-1&t=ulfbgr4T8iMfiTBA-1
+- Team size: 1 person
+- Used technologies: React Native, JavaScript, Expo, Figma
+
+### Animation Shorts
+In my exchange year at the Sogang university, I created a couple of 3D animations with Maya 2019. In the Animations folder, you can find the two end results, both of which earned the highest grades in the course.
+- Team size: 1~3 people
+- Used technologies: Maya 2019
