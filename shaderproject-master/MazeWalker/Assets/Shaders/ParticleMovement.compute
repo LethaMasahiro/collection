@@ -1,0 +1,89 @@
+﻿// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+struct Particle
+{
+    float3 pos;
+    float3 vel;
+    float3 targetVel;
+    float3 targetOffset;
+};
+
+// Particle's data, shared with the shader
+RWStructuredBuffer<Particle> particleBuffer;
+
+// Variables set from the CPU
+float deltaTime;
+float3 targetPosition;
+float3 wind;
+float radius;
+float steering;
+float speedMultiplier;
+float drag;
+
+[numthreads(256,1,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    Particle p = particleBuffer[id.x];
+
+    float3 offset = float3(0, p.targetOffset.x * radius * 2, 0);
+
+    float3 posDelta = targetPosition - p.pos;
+    float3 offDelta = posDelta + offset;
+
+    float3 normal = -normalize(offDelta);
+    float distanceToTarget = length(posDelta);
+
+    float3 force = -p.vel * drag + wind;
+
+    if (distanceToTarget > radius) {
+        float d = dot(normalize(p.vel), normal) + 2;
+
+        force += -normal * steering * distanceToTarget * distanceToTarget * d;
+    } else if (distanceToTarget < radius * 0.1) {
+        force += normal * steering;
+    } else {
+        force += -normal * (distanceToTarget * distanceToTarget + 1);
+        force += cross(posDelta, p.targetOffset) * steering;
+    }
+
+    p.targetVel = normalize(p.vel);
+
+    p.vel += force * deltaTime;
+    p.pos += p.vel * deltaTime;
+    particleBuffer[id.x] = p;
+}
+
+// [numthreads(256,1,1)]
+// void CSMain (uint3 id : SV_DispatchThreadID)
+// {
+//     Particle p = particleBuffer[id.x];
+
+//     float speed = length(p.vel);
+
+//     float3 posDelta = targetPosition - p.pos;
+
+//     float distanceToTarget = length(posDelta);
+//     float targetDistance = radius;
+//     float distanceDelta = targetDistance - distanceToTarget;
+
+//     float3 perpVel = normalize(p.pos - targetPosition) * distanceDelta;
+
+
+//     float3 right = cross(perpVel, p.vel);
+//     float3 atVel = normalize(cross(right, perpVel)) * speedMultiplier;
+
+//     float3 targetVel = lerp(atVel, perpVel, abs(distanceDelta) / targetDistance);
+//     p.targetVel = targetVel;
+//     targetVel = targetVel;
+
+//     // steer
+//     float3 steeringForce = targetVel * steering - p.vel;
+//     // steeringForce = targetVel * steering;
+//     p.vel += steeringForce * deltaTime;
+//     // p.vel = speedMultiplier * normalize(p.vel);
+//     // p.vel *= 0.995;
+//     p.pos += p.vel * deltaTime;
+
+//     particleBuffer[id.x] = p;
+// }

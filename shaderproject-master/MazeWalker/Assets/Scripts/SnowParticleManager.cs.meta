@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c5a9cbd666ff977488d466c7af99e7de
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - SnowParticleMaterial: {fileID: 2100000, guid: 01b1ca3c925dda04297d8d486f07f145,
+      type: 2}
+  - ComputeShader: {instanceID: 0}
+  executionOrder: 50
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,71 @@
+﻿// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain2
+#include "noiseSimplex.cginc"
+
+struct SnowParticle
+{
+    float3 pos;
+    float3 vel;
+};
+
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+RWTexture2D<float4> Result;
+
+// Particle's data, shared with the shader
+RWStructuredBuffer<SnowParticle> particleBuffer;
+float deltaTime;
+float time;
+float gravity; //y-coordinate
+float3 playerPos;
+float3 snowRadius;
+
+[numthreads(256,1,1)]
+void CSMain2 (uint3 id : SV_DispatchThreadID)
+{
+    SnowParticle p = particleBuffer[id.x];
+    float3 force = float3(0, -gravity, 0);
+    float3 windForce = snoise((p.pos + float3(time, time, time) * 1) * 10);
+    windForce.y = 0;
+    force += windForce * 10;
+
+    //TODO: Wind force with noise
+
+    force -= p.vel * 0.75;
+
+    p.vel += force * deltaTime;
+    p.pos += p.vel * deltaTime;
+
+    float leftBorder = playerPos.x - snowRadius.x;
+    float rightBorder = playerPos.x + snowRadius.x;
+    float upperBorder = playerPos.y + snowRadius.y;
+    float lowerBorder = playerPos.y - snowRadius.y;
+    float frontBorder = playerPos.z + snowRadius.z;
+    float backBorder = playerPos.z - snowRadius.z;
+    if (p.pos.x < leftBorder)
+    {
+        p.pos.x += 2 * snowRadius.x;
+    }
+    if (p.pos.x > rightBorder)
+    {
+        p.pos.x -= 2 * snowRadius.x;
+    }
+    if (p.pos.y > upperBorder)
+    {
+        p.pos.y -= 2 * snowRadius.y;
+    }
+    if (p.pos.y < lowerBorder)
+    {
+        p.pos.y += 2 * snowRadius.y;
+    }
+    if (p.pos.z > frontBorder)
+    {
+        p.pos.z -= 2 * snowRadius.z;
+    }
+    if (p.pos.z < backBorder)
+    {
+        p.pos.z += 2 * snowRadius.z;
+    }
+
+    particleBuffer[id.x] = p;
+}
